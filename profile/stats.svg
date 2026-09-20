@@ -1,0 +1,16 @@
+<svg width="460" height="200" viewBox="0 0 460 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Priyansh Srivastava's GitHub Stats">
+<rect x="0.5" y="0.5" rx="10" width="459" height="199" fill="#0d1117" stroke="#30363d"/>
+<text x="25" y="35" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="17" font-weight="600" fill="#58a6ff">Priyansh Srivastava's GitHub Stats</text>
+<circle cx="30" cy="49" r="5" fill="#e3b341"/>
+<text x="45" y="55" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="14" fill="#c9d1d9">Total Stars Earned</text>
+<text x="435" y="55" text-anchor="end" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="14" font-weight="600" fill="#c9d1d9">4</text>
+<circle cx="30" cy="79" r="5" fill="#58a6ff"/>
+<text x="45" y="85" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="14" fill="#c9d1d9">Public Repositories</text>
+<text x="435" y="85" text-anchor="end" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="14" font-weight="600" fill="#c9d1d9">33</text>
+<circle cx="30" cy="109" r="5" fill="#3fb950"/>
+<text x="45" y="115" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="14" fill="#c9d1d9">Total Forks</text>
+<text x="435" y="115" text-anchor="end" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="14" font-weight="600" fill="#c9d1d9">4</text>
+<circle cx="30" cy="139" r="5" fill="#f78166"/>
+<text x="45" y="145" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="14" fill="#c9d1d9">Followers</text>
+<text x="435" y="145" text-anchor="end" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="14" font-weight="600" fill="#c9d1d9">13</text>
+</svg>
