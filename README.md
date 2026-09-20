@@ -1,6 +1,8 @@
+## Hi there!
+
 Engineer with 5 years of experience building software, data platforms, and automated workflows for scientific and operational data. Skilled in designing clean, domain-driven architectures using Python, JavaScript, and SQL, with strong experience across FastAPI, React, Docker, Terraform, AWS infrastructure.
 
-<br>
+---
 
 ### Tech Stack
 
@@ -63,17 +65,18 @@ Engineer with 5 years of experience building software, data platforms, and autom
   <img src="https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white" alt="scikit-learn"/>
 </p>
 
-<br>
+---
 
-### GitHub Stats
+<!-- ### GitHub Stats -->
 
-![Priyansh's GitHub stats](./profile/stats.svg) ![Top Languages](./profile/top-langs.svg)
+<!-- ![Priyansh's GitHub stats](./profile/stats.svg)  -->
 
-<sub>Generated daily by a <a href="./.github/workflows/generate-stats.yml">GitHub Action</a> from live public data — see <a href="./scripts/generate_stats.py">scripts/generate_stats.py</a>.</sub>
+<!-- ![Top Languages](./profile/top-langs.svg) -->
 
-<br>
+<!-- <sub>Generated daily by a <a href="./.github/workflows/generate-stats.yml">GitHub Action</a> from live public data — see <a href="./scripts/generate_stats.py">scripts/generate_stats.py</a>.</sub> -->
 
-### Connect
+
+### Portfolio
 
 <p align="left">
   <a href="https://metapriyansh.com"><img src="https://img.shields.io/badge/Portfolio-000000?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Portfolio"/></a>
