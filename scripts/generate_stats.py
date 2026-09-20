@@ -42,6 +42,7 @@ LANG_COLORS = {
     "SCSS": "#c6538c",
 }
 DEFAULT_LANG_COLOR = "#8b949e"
+EXCLUDED_LANGS = {"HTML", "TeX", "Jupyter Notebook"}
 
 BG = "#0d1117"
 BORDER = "#30363d"
@@ -122,7 +123,7 @@ def esc(text):
     )
 
 
-def stats_card(title, rows, width=460):
+def stats_card(title, rows, width=330):
     row_h = 30
     top_pad = 55
     height = top_pad + row_h * len(rows) + 25
@@ -152,7 +153,7 @@ def stats_card(title, rows, width=460):
     return "\n".join(parts)
 
 
-def top_langs_card(langs, width=380):
+def top_langs_card(langs, width=300):
     top_pad = 55
     row_h = 26
     bar_h = 10
@@ -208,6 +209,8 @@ def main():
     lang_bytes = {}
     for r in repos:
         for lang, count in fetch_languages(r["owner"]["login"], r["name"]).items():
+            if lang in EXCLUDED_LANGS:
+                continue
             lang_bytes[lang] = lang_bytes.get(lang, 0) + count
 
     contrib = fetch_contributions(USERNAME)
@@ -224,7 +227,7 @@ def main():
 
     os.makedirs(OUT_DIR, exist_ok=True)
     with open(os.path.join(OUT_DIR, "stats.svg"), "w") as f:
-        f.write(stats_card(f"{user.get('name') or USERNAME}'s GitHub Stats", rows))
+        f.write(stats_card("GitHub Stats", rows))
 
     total_bytes = sum(lang_bytes.values()) or 1
     top = sorted(lang_bytes.items(), key=lambda kv: kv[1], reverse=True)[:6]

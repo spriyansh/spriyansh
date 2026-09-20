@@ -67,12 +67,7 @@ Engineer with 5 years of experience building software, data platforms, and autom
 
 ### GitHub Stats
 
-<table>
-  <tr>
-    <td><img width="100%" src="./profile/stats.svg" alt="Priyansh's GitHub stats"/></td>
-    <td><img width="100%" src="./profile/top-langs.svg" alt="Top Languages"/></td>
-  </tr>
-</table>
+![Priyansh's GitHub stats](./profile/stats.svg) ![Top Languages](./profile/top-langs.svg)
 
 <sub>Generated daily by a <a href="./.github/workflows/generate-stats.yml">GitHub Action</a> from live public data — see <a href="./scripts/generate_stats.py">scripts/generate_stats.py</a>.</sub>
 
