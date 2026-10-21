@@ -18,5 +18,5 @@
 <text x="305" y="175" text-anchor="end" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="14" font-weight="600" fill="#c9d1d9">6</text>
 <circle cx="30" cy="199" r="5" fill="#db61a2"/>
 <text x="45" y="205" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="14" fill="#c9d1d9">PRs (past year)</text>
-<text x="305" y="205" text-anchor="end" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="14" font-weight="600" fill="#c9d1d9">25</text>
+<text x="305" y="205" text-anchor="end" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="14" font-weight="600" fill="#c9d1d9">31</text>
 </svg>
