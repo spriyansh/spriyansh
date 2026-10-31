@@ -102,6 +102,7 @@ def fetch_contributions(username):
           totalCommitContributions
           totalPullRequestContributions
           totalIssueContributions
+          totalPullRequestReviewContributions
         }
       }
     }
@@ -123,10 +124,51 @@ def esc(text):
     )
 
 
-def stats_card(title, rows, width=330):
+def calculate_rank(commits, prs, issues, reviews, stars, followers):
+    """Percentile rank -> letter grade, same weighting as github-readme-stats."""
+    def exp_cdf(x):
+        return 1 - 2 ** -x
+
+    def log_cdf(x):
+        return x / (1 + x)
+
+    weighted = (
+        2 * exp_cdf(commits / 250)
+        + 3 * exp_cdf(prs / 50)
+        + 1 * exp_cdf(issues / 25)
+        + 1 * exp_cdf(reviews / 2)
+        + 4 * log_cdf(stars / 50)
+        + 1 * log_cdf(followers / 10)
+    )
+    percentile = 100 * (1 - weighted / 12)
+    levels = ["S", "A+", "A", "A-", "B+", "B", "B-", "C+", "C"]
+    thresholds = [1, 12.5, 25, 37.5, 50, 62.5, 75, 87.5, 100]
+    level = next(l for l, t in zip(levels, thresholds) if percentile <= t)
+    return level, percentile
+
+
+def rank_badge(cx, cy, level, percentile, r=40):
+    circ = 2 * 3.14159265 * r
+    filled = circ * (100 - percentile) / 100
+    return [
+        f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="{BORDER}" stroke-width="6"/>',
+        f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="{TITLE_COLOR}" stroke-width="6" '
+        f'stroke-linecap="round" stroke-dasharray="{filled:.1f} {circ:.1f}" '
+        f'transform="rotate(-90 {cx} {cy})"/>',
+        f'<text x="{cx}" y="{cy + 10}" text-anchor="middle" '
+        f'font-family="\'Segoe UI\', Ubuntu, Sans-Serif" font-size="30" font-weight="700" '
+        f'fill="{TITLE_COLOR}">{esc(level)}</text>',
+        f'<text x="{cx}" y="{cy + r + 22}" text-anchor="middle" '
+        f'font-family="\'Segoe UI\', Ubuntu, Sans-Serif" font-size="11" '
+        f'fill="{MUTED_COLOR}">Top {max(percentile, 1):.0f}%</text>',
+    ]
+
+
+def stats_card(title, rows, rank=None, width=450):
     row_h = 30
     top_pad = 55
-    height = top_pad + row_h * len(rows) + 25
+    height = max(top_pad + row_h * len(rows) + 25, 190 if rank else 0)
+    value_x = 280 if rank else width - 25
 
     parts = [
         f'<svg width="{width}" height="{height}" viewBox="0 0 {width} {height}" '
@@ -136,6 +178,8 @@ def stats_card(title, rows, width=330):
         f'<text x="25" y="35" font-family="\'Segoe UI\', Ubuntu, Sans-Serif" '
         f'font-size="17" font-weight="600" fill="{TITLE_COLOR}">{esc(title)}</text>',
     ]
+    if rank:
+        parts.extend(rank_badge(width - 75, height // 2 - 5, *rank))
     y = top_pad
     for icon_color, label, value in rows:
         parts.append(f'<circle cx="30" cy="{y - 6}" r="5" fill="{icon_color}"/>')
@@ -144,7 +188,7 @@ def stats_card(title, rows, width=330):
             f'font-size="14" fill="{TEXT_COLOR}">{esc(label)}</text>'
         )
         parts.append(
-            f'<text x="{width - 25}" y="{y}" text-anchor="end" '
+            f'<text x="{value_x}" y="{y}" text-anchor="end" '
             f'font-family="\'Segoe UI\', Ubuntu, Sans-Serif" font-size="14" '
             f'font-weight="600" fill="{TEXT_COLOR}">{esc(value)}</text>'
         )
@@ -225,9 +269,20 @@ def main():
         rows.append(("#a371f7", "Commits (past year)", contrib["totalCommitContributions"]))
         rows.append(("#db61a2", "PRs (past year)", contrib["totalPullRequestContributions"]))
 
+    rank = None
+    if contrib:
+        rank = calculate_rank(
+            contrib["totalCommitContributions"],
+            contrib["totalPullRequestContributions"],
+            contrib["totalIssueContributions"],
+            contrib["totalPullRequestReviewContributions"],
+            total_stars,
+            user.get("followers", 0),
+        )
+
     os.makedirs(OUT_DIR, exist_ok=True)
     with open(os.path.join(OUT_DIR, "stats.svg"), "w") as f:
-        f.write(stats_card("GitHub Stats", rows))
+        f.write(stats_card("GitHub Stats", rows, rank))
 
     total_bytes = sum(lang_bytes.values()) or 1
     top = sorted(lang_bytes.items(), key=lambda kv: kv[1], reverse=True)[:6]
